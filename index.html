@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Instasprite</h1>
+    <form id="file-form">
+      <input type="file" id="files" multiple>
+      <input type="reset" value="Clear">
+      <div id="sprites"></div>
+      <div id="images" style="display: none"></div>
+    </form>
+    <script src="js/instasprite.js"></script>
+    <script>
+      (function () {
+        var ready = function () {
+          var fileInput = document.getElementById('files'),
+            fileForm = document.getElementById('file-form'),
+            sprites = document.getElementById('sprites'),
+            images = document.getElementById('images'),
+            instasprite = new Instasprite(sprites, images);
+            fileChange = function (e) {
+              instasprite.addFiles(fileInput.files);
+            },
+            reset = function () {
+              fileForm.reset();
+              instasprite.clear();
+            };
+          fileInput.addEventListener('change', fileChange);
+          fileForm.addEventListener('reset', reset);
+        }
+        document.addEventListener('DOMContentLoaded', ready, false);
+      })();
+    </script>
+  </body>
+</html>
